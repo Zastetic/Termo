@@ -1,0 +1,243 @@
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  padding: 30px;
+  font-family: Arial, sans‑serif;
+  background-color: rgb(31, 29, 29);
+  color: white;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+h1 {
+  color: #ffffff;
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.logo {
+  width: 50px;
+  border: 2px solid #Daa520;
+  border-radius: 5px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.classificacao {
+  width: 35px; height: 35px;
+  background-color: black;
+  color: #Daa520;
+  border-radius: 50%;
+  border: 2px solid #Daa520;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 10px 15px 0 0;
+}
+
+.retangulo {
+  background-color: #504b4b;
+  border: 2px solid #Daa520;
+  border-radius: 17px;
+  padding: 15px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.topo-retangulo {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.conteudo-horizontal {
+  display: flex;
+  align-items: center;
+}
+
+.retangulo img {
+  width: 300px; height: 200px;
+  object-fit: cover;
+  margin-right: 25px;
+  border-radius: 4px;
+  border: 3px solid #Daa520;
+}
+
+.pontos {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
+  padding: 20px 10px;
+  margin-top: 50px;
+  color: white;
+}
+footer a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+footer a:hover {
+  color: #Daa520;
+}
+
+nav.menu.lateral {
+  position: fixed; top: 0; left: 0;
+  width: 80px; height: 100%;
+  background-color: #000;
+  padding: 40px 1% 40px;
+  box-shadow: 3px 0 0 #Daa520;
+  overflow: hidden;
+  transition: width 0.2s;
+  z-index: 1000;
+}
+nav.menu.lateral:hover {
+  width: 300px;
+}
+.btn-expandir {
+  width: 100%;
+  padding-left: 10px;
+}
+.btn-expandir > i {
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+ul {
+  height: 100%;
+  list-style: none;
+  padding: 0;
+  color: white;
+}
+ul li.item-menu {
+  transition: background-color 0.1s;
+}
+ul li.item-menu:hover {
+  background-color: #Daa520;
+}
+ul li.item-menu a {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  padding: 20px 4%;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: white;
+}
+ul li.item-menu a .txt-link {
+  margin-left: 40px;
+}
+ul li.item-menu a .icon > i {
+  font-size: 30px;
+  margin-left: 0;
+}
+
+/* Responsivo */
+@media (max-width: 1104px) {
+  nav.menu.lateral { width: 40px; }
+  nav.menu.lateral:hover { width: 180px; }
+  .retangulo {
+    width: 80px; height: 180px;
+    padding-left: 20px;
+    margin-left: 0;
+  }
+  .retangulo img {
+    width: 110px; height: 110px;
+  }
+  h1 {
+    font-size: 30px;
+    margin-left: 10px;
+  }
+  .btn-expandir { padding-left: 0; }
+  .classificacao {
+    width: 17px; height: 17px;
+    margin-left: 40px;
+  }
+}
+
+/* ——— Tema claro (body.dark) ——— */
+body.dark {
+  background-color: #f5f5f5;
+  color: #222;
+}
+body.dark h1 {
+  color: #504b4b;
+}
+body.dark .logo {
+  border-color: #c3941d;
+}
+body.dark .classificacao {
+  background-color: white;
+  color: #c3941d;
+  border-color: #c3941d;
+}
+body.dark .retangulo {
+  background-color: #ece8e8;
+  border-color: #c3941d;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+body.dark .retangulo img {
+  border-color: #c3941d;
+}
+body.dark .topo-retangulo,
+body.dark .pontos {
+  color: #222;
+}
+body.dark footer {
+  color: #222;
+}
+body.dark footer a {
+  color: #222;
+}
+body.dark footer a:hover {
+  color: #c3941d;
+}
+body.dark nav.menu.lateral {
+  background-color: #ece8e8;
+  box-shadow: 3px 0 0 #c3941d;
+}
+body.dark nav.menu.lateral:hover {
+  background-color: #ece8e8;
+}
+body.dark ul,
+body.dark ul li.item-menu a {
+  color: #222;
+}
+body.dark ul li.item-menu:hover {
+  background-color: #c3941d;
+}

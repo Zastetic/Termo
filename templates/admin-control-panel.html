@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>adm edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    
+</head>
+<body class="bg-gray-100">
+ 
+    <div class="flex h-screen">
+        <div class="w-64 bg-gray-800 text-white p-4 hidden md:block">
+            <h2 class="text-xl font-bold mb-6 mt-4 text-center">🏆 Sistema de Pontos</h2>
+            <ul class="space-y-2">
+                
+                <li><a href="#dashboard" class="block py-2 px-4 bg-gray-700 rounded">📊 Pontuação das Casas</a></li>
+                <li><a href="#controle" class="block py-2 px-4 hover:bg-gray-700 rounded">🎛 Controle de Pontos</a></li>
+                <li><a href="#historico" class="block py-2 px-4 hover:bg-gray-700 rounded">📜 Histórico</a></li>
+                <li><a href="#nova-casa" class="block py-2 px-4 hover:bg-gray-700 rounded">🏠 Criar Nova Casa</a></li>
+                <li><a href="#adm-keys" class="block py-2 px-4 hover:bg-gray-700 rounded">🔑 Admin Login</a></li>
+            </ul>
+            <div class="mt-8 pt-4 border-t border-gray-700">
+                <form method="post">
+                    <input type="hidden" name="form_id" value="logout">
+                    <button type="submit" class="w-full text-left py-2 px-4 bg-red-600 hover:bg-red-700 rounded mt-4">
+                        🚪 Sair
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto">
+            <header class="bg-white shadow-sm">
+                <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+                    <div class="flex items-center">
+                        <a href="/" class="mr-4 text-gray-600 hover:text-gray-900">
+                        <span class="material-icons">arrow_back</span>
+                        </a>
+                    <h1 class="text-2xl font-bold text-gray-800">Área de Administrador</h1>
+                    </div>
+                        <div class="flex items-center gap-4">
+                            <span class="text-gray-600 text-sm">
+                            Logado como <span class="font-semibold text-gray-800">{{ usuario }}</span>
+                            </span>
+                        <a href="/help" class="w-6 h-6 flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-full text-sm font-bold shadow">
+                            ?
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+                <section id="dashboard" class="mb-12">
+                    <h2 class="text-xl font-semibold mb-4">📊 Pontuação das Casas</h2>
+                    <form method="post" id="periodo">
+                        <select class="flex-1 p-2 border rounded" required>
+                            <option value="0" id="manha" {{ "selected" if periodo == "manha" else "" }}>Manhã</option>
+                            <option value="1" id="tarde" {{ "selected" if periodo == "tarde" else "" }}>Tarde</option>
+                            <option value="2" id="noite" {{ "selected" if periodo == "noite" else "" }}>Noite</option>
+                        </select>
+                        <button type="submit" name="periodo" class="bg-green-500 text-white px-4 py-2 rounded">Confirmar</button>
+                    </form>
+                    <!-- dinamic adition with js here -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8" id="holder">
+                        <!-- DEFAULT CASA INFORMATION, DON'T DELETE!-->
+                        <div class="bg-white p-6 rounded-lg shadow flex items-center" id="pontuation_table">
+                            <img name="icon" src="" alt="Brasão" class="w-16 h-16 mr-4"> <!-- Aumentado para w-16 h-16 -->
+                            <div>
+                                <h3 name="name"  class="font-medium text-gray-500">Sarue</h3>
+                                <p name="points" class="text-3xl font-bold">1,420</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+             
+                <section id="controle" class="mb-12">
+                    <h2 class="text-xl font-semibold mb-4">🎛 Controle de Pontos</h2>
+                    
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <div class="p-6 border-b">
+                            <h3 class="font-medium mb-2">Atribuição Manual</h3>
+                            <form method="post" class="flex flex-col md:flex-row md:items-end gap-4 flex-wrap">
+                                <input type="hidden" name="form_id" value="add_points"> <!-- Ignore this -->
+
+                                <select id="casa" name="casa" class="p-2 border rounded w-full md:w-auto" required>
+                                    <option value="0" selected disabled>Selecione a casa</option>
+                                </select>
+
+                                <input type="number" name="pontos" placeholder="Pontos" required class="p-2 border rounded w-full md:w-32">
+
+                                <input type="text" name="motivo" placeholder="Motivo" required class="p-2 border rounded flex-1 min-w-[200px]">
+
+                                <button type="submit" name="acao" value="adicionar" class="bg-green-500 text-white px-4 py-2 rounded w-full md:w-auto">Adicionar Pontos</button>
+                                <button type="submit" name="acao" value="remover" class="bg-red-500 text-white px-4 py-2 rounded w-full md:w-auto">Remover Pontos</button>
+                            </form>
+                            </div>
+
+                        <div class="p-6">
+                            <h3 class="font-medium mb-4">Adicionar Pontos</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <form id="good-actions" class="space-y-2">
+                                    <input type="hidden" name="form_id" value="add_credencial"> <!-- Ignore this -->
+                                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded" value="150">Aula Boa (+150)</button>
+                                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded" value="300">Aula Excelente (+300)</button>
+                                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded" value="200">Prova Paulista (+200)</button>
+                                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded" value="100">Boletim Azul (+100)</button>
+                                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded" value="200">Bom Comportamento (+200)</button>
+                                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded" value="150">Frequência Acima 75% (+150)</button>
+                                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded" value="200">Participação em Projetos (+200)</button>
+                                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded" value="200">Atitude Positiva (+200)</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="p-6">
+                            <h3 class="font-medium mb-4">Remover Pontos</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <form id="bad-actions" class="space-y-2">
+                                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded" value="-100">Fone (-100)</button>
+                                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded" value="-100">Dormir (-100)</button>
+                                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded" value="-300">Infração Média (-300)</button>
+                                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded" value="-200">Atitude Negativa (-200)</button>
+                                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded" value="-300">Relatório (-300)</button>
+                                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded" value="-400">Suspensão (-400)</button>
+                                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded" value="-200">Indisciplina (-200)</button>
+                                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded" value="-150">Frequência Baixa (-150)</button>
+                                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded" value="-200">Celular (-200)</button>
+                                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded" value="-200">Sala Desorganizada (-200)</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="nova-casa" class="mb-12">
+                    <h2 class="text-xl font-semibold mb-4">🏠 Criar Nova Casa</h2>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <form method="POST" enctype="multipart/form-data" class="flex flex-col gap-4">
+                        <input type="hidden" name="form_id" value="modify_casa"> <!-- Ignore this -->
+                        <input type="text" name="nome" placeholder="Nome da Casa" required class="p-2 border rounded">
+
+                        <!-- input de foto -->
+                        <input type="file" name="foto" accept="image/*" class="p-2 border rounded">
+                        <p id="create_casa_error_message"> {{ create_casa_error }} </p>
+                    
+                        <!-- botões lado a lado -->
+                        <div class="flex gap-2">
+                            <button
+                            type="submit"
+                            name="acao"
+                            value="create_class"
+                            class="w-1/2 bg-green-500 text-white px-4 py-2 rounded"
+                            >
+                            Criar Casa
+                            </button>
+                            <button
+                            type="submit"
+                            name="acao"
+                            value="delete_class"
+                            class="w-1/2 bg-red-500 text-white px-4 py-2 rounded"
+                            >
+                            Deletar Casa
+                            </button>
+                        </div>
+                        </form>
+                    </div>
+                </section>
+
+                <section id="historico" class="mb-12">
+                    <h2 class="text-xl font-semibold mb-4">📜 Histórico Recente</h2>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <form id="form-historico" method="post">
+                            <input type="hidden" name="form_id" value="history"> <!-- Ignore this -->
+                                <ul id="historico-lista" class="list-disc pl-5 space-y-1">
+                                    
+                                    <!-- MODELO DE EVENTO-->
+                                    <li class="bg-gray-100 px-4 py-2 rounded shadow-sm flex justify-between items-center" id="event-model">
+                                    <span class="text-gray-800">Jaguar ganhou 150 pontos - Aula Excelente</span>
+                                    </li>
+
+                                <!-- Eventos renderizados com JS -->
+                                </ul>
+
+                            <!-- Paginação -->
+                                <div class="flex justify-between items-center mt-6">
+                                    <button name="action_button" value="-1" type="submit" id="btn-anterior" class="bg-gray-300 hover:bg-gray-400 px-4 py-2 rounded">
+                                    ⬅ Anterior
+                                    </button>
+                                    <span id="pagina-atual" value="{{ atual_page }}" class="text-sm text-gray-700">{{ atual_page }}</span>
+                                    <button name="action_button" value="1" type="submit" id="btn-proximo" class="bg-gray-300 hover:bg-gray-400 px-4 py-2 rounded">
+                                    Próxima ➡
+                                    </button>
+                                </div>
+                            </form>
+                    </div>
+                    </section>
+                <section id="adm-keys" class="mb-12">
+    <h2 class="text-xl font-semibold mb-4">🔑 Gerenciar Credenciais de Administrador</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Adicionar nova credencial -->
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="font-medium text-lg mb-4">➕ Adicionar Nova Chave</h3>
+            <form id="add-credencial" class="space-y-3" method="post">
+                <input type="hidden" name="form_id" value="add_credencial"> <!-- Ignore this -->
+
+                <input type="text" name="nome" placeholder="Nome do usuario" required class="w-full p-2 border rounded">
+                <input type="text" name="usuario" placeholder="Usuário" required class="w-full p-2 border rounded">
+                <input type="password" name="senha" placeholder="Senha" required class="w-full p-2 border rounded">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded w-full">Adicionar</button>
+            </form>
+        </div>
+
+        <!-- Editar credencial existente -->
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="font-medium text-lg mb-4">✏️ Editar Chave Existente</h3>
+            <form id="edit-credencial" class="space-y-3" method="post">
+                <select name="nome" required class="w-full p-2 border rounded" id="edit-credencial-select">
+                    <input type="hidden" name="form_id" value="add_credencial"> <!-- Ignore this -->
+                    
+                    <option disabled selected>Selecione uma chave</option>
+                    <!-- DINAMIC ADITION WITH JS HERE!  -->
+                     
+                </select>
+                <input type="text" name="new_user" placeholder="Novo Usuário" class="w-full p-2 border rounded">
+                <input type="password" name="new_password" placeholder="Nova Senha" class="w-full p-2 border rounded">
+                <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded w-full">Atualizar</button>
+            </form>
+        </div>
+
+        <!-- Remover credencial -->
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="font-medium text-lg mb-4">🗑 Remover Chave</h3>
+            <form id="delete-credencial" class="space-y-3" method="post">
+                <input type="hidden" name="form_id" value="delete-credencial"> <!-- Ignore this -->
+
+                <select name="user_name" required class="w-full p-2 border rounded" id="delete-credencial-select">
+                    <option name="user_name" disabled selected>Selecione uma chave para remover</option>
+                    <!-- DINAMIC ADITION WITH JS HERE!  -->
+
+                </select>
+                <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded w-full">Remover</button>
+            </form>
+        </div>
+    </div>
+</section>
+            </main>
+        </div>
+    </div>
+<script src="../static/js/period_select.js"></script>
+<script src="../static/js/adminApp.js"></script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,82 @@
+/* ——— Tema padrão (escuro) ——— */
+html, body {
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+}
+body {
+  background-color: rgb(31, 29, 29);
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+h1 {
+  color: #Daa520;
+  font-size: 50px;
+}
+
+.opcao {
+  background-color: #1e1e1e;
+  border: 3px solid #Daa520;
+  border-radius: 8px;
+  padding: 30px 50px;
+  margin: 15px 0;
+  width: 500px;
+  height: 75px;
+  text-align: center;
+  font-size: 40px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+.opcao:hover {
+  background-color: #333;
+  border-color: #666;
+}
+
+footer {
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: relative;
+  bottom: 0;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  transform: translateY(70%);
+}
+footer p, footer span, footer a {
+  margin: 0 4px; 
+  padding: 0;
+}
+a {
+  color: white;
+  text-decoration: none;
+}
+
+/* ——— Tema claro (quando body.dark) ——— */
+body.dark {
+  background-color: #f5f5f5;
+  color: #222;
+}
+body.dark h1 {
+  color: #c3941d;
+}
+body.dark .opcao {
+  background-color: #fff;
+  border-color: #c3941d;
+}
+body.dark .opcao:hover {
+  background-color: #eee;
+  border-color: #999;
+}
+body.dark footer {
+  color: #222;
+}
+body.dark a {
+  color: #222;
+}

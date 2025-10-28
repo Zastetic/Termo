@@ -1,0 +1,76 @@
+  html body{
+    overflow-x: hidden;
+    
+  }
+  body {
+      background-color:rgb(31, 29, 29);
+      color: #fff;
+      font-family: Arial, sans-serif;
+    padding: 20px 30px 20px;
+    text-align: center;
+       scrollbar-width: none;
+        
+    }
+
+    h1 {
+      font-size: 48px;
+      text-align: center;
+      color: #fff;
+      margin-bottom: 60px;
+    }
+    h1, h2 {
+    text-align: center; 
+    }
+
+    h2 {
+      font-size: 36px;
+      color: #Daa520;
+      margin-top: 60px;
+      margin-bottom: 30px;
+    }
+
+    .regra {
+     font-size: 28px;
+    margin: 20px auto;
+    line-height: 1.6;
+    max-width: 800px; 
+    }
+
+    .regra span {
+      display: block;
+      font-size: 22px;
+      color: #ccc;
+      margin-top: 8px;
+    }
+
+    .remover {
+      color: #ffffff;
+    }
+
+    .remover span {
+      color: #ffffff;
+    }
+
+    body {
+  background-color: rgb(31, 31, 29);
+  color: white;
+  transition: 0.3s;
+}
+
+body.dark {
+  background-color: #cdcaca;
+  color: rgb(16, 136, 20);
+}
+
+body.dark h1{
+  color: black;
+}
+body.dark h2{
+  color: #c3941d;
+}
+body.dark span{
+  color: black;
+}
+body.dark .remover{
+  color: rgb(194, 17, 17);
+}

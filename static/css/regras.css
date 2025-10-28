@@ -1,0 +1,62 @@
+  html body{
+    overflow-x: hidden;
+    
+  }
+
+  
+  
+  
+  body {
+      background-color:rgb(91, 91, 91);
+      color: #fff;
+      font-family: Arial, sans-serif;
+    padding: 20px 30px 20px;
+    text-align: center;
+       scrollbar-width: none;
+        
+    }
+
+    h1 {
+      font-size: 48px;
+      text-align: center;
+      color: #fff;
+      margin-bottom: 60px;
+    }
+    h1, h2 {
+    text-align: center; 
+    }
+
+    h2 {
+      font-size: 36px;
+      color: #Daa520;
+      margin-top: 60px;
+      margin-bottom: 30px;
+    }
+
+   
+    
+
+    .regra {
+     font-size: 28px;
+    margin: 20px auto;
+    line-height: 1.6;
+    max-width: 800px; 
+    }
+
+    .regra span {
+      display: block;
+      font-size: 22px;
+      color: #ccc;
+      margin-top: 8px;
+    }
+
+    .remover {
+      color: #ffffff;
+    }
+
+    .remover span {
+      color: #ffffff;
+    }
+
+
+

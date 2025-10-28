@@ -1,0 +1,31 @@
+CONTRIBUIÇÕES:
+
+-- front-end --
+Nicolas Jesus: 
+- Produção completa da pagina inicial, pagina de regras e pagina de ranking. 
+- sistema de tema (claro/escuro) com Javascript
+
+Eloisy:
+- Produção completa da pagina do painel de admin e da pagina de login.
+
+Cauê:
+- Auxilio na produção da pagina inicial.
+
+Luiz Henrique:
+- Auxilio na produção da pagina inicial.
+
+
+-- back-end --
+Victor Hugo:
+- Mapeamento das necessidades do sistema e produção de diagramas.
+- Produção das rotas da aplicação (pag inicial, regras, admin, login admin).
+- Produção do criando tables de todos os periodos, de admin e historico.
+- Organização geral do projeto.
+- Produção de codigos JS para chamada de API e manipulação de elementos.
+- Produção de sistema de pontos, sistema de login, sistema de registramento de chaves de admin e sistema de historico.
+
+Gustavo:
+- Produção de prototipo do database.
+- Produção de prototipo do sistema de login para admin.
+- Auxilio na produção da página do painel de admin.
+- Auxilio na organização da produção do projeto.

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login Admin</title>
+  <link rel="stylesheet" href="../static/css/style.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="../static/css/admin-panel-style.css">
+</head>
+
+<body>
+  <div class="login-container" role="main" aria-labelledby="loginTitle">
+    <h1 id="loginTitle">Acesso Administrador</h1>
+    <form method="post">
+      <div class="input-box">
+        <label for="username">Usuário</label>
+        <i class='bx bxs-user'></i>
+        <input type="text" id="username" name="username" placeholder="Digite seu nome" autocomplete="username" required />
+      </div>
+
+      <div class="input-box">
+        <label for="password">Senha</label>
+        <i class='bx bxs-lock-alt'></i>
+        <input type="password" id="password" name="password" placeholder="Digite sua senha" autocomplete="current-password" required />
+      </div>
+      <p class="error">{{ error_message }}</p>
+
+      <div class="checkbox-container">
+        <input type="checkbox" id="remember" name="remember" />
+        <label for="remember">Lembrar minha senha</label>
+      </div>
+
+      <div class="buttons">
+        <button type="button" class="btn-back" onclick="window.location.href='/';">Voltar</button>
+        <button type="submit" class="btn-login">Entrar</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

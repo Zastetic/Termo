@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taça das Casas Ranking</title>
+    <link rel="stylesheet" href="../static/css/preranking.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <h1>Escolha o seu Período</h1>
+    <a href="#" class="opcao" onclick="setPeriodo('manha'); window.parent.document.getElementById('contiframe').src = '/ranking';">Período da Manhã</a>
+    <a href="#" class="opcao" onclick="setPeriodo('tarde'); window.parent.document.getElementById('contiframe').src = '/ranking'">Período da Tarde</a>
+    <a href="#" class="opcao" onclick="setPeriodo('noite'); window.parent.document.getElementById('contiframe').src = '/ranking'">Período da Noite</a>
+</body>
+<script src="../static/js/period_select.js"></script>
+<script src="../static/js/changeTheme.js"></script>
+</html>

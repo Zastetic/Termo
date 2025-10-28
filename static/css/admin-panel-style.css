@@ -1,0 +1,13 @@
+:root {
+    --primary: #2c3e50;
+    --secondary: #34495e;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --add: #28a745;
+    --remove: #dc3545;
+}
+
+.house-jaguar { border-left: 4px solid #e74c3c; }
+.house-urubu { border-left: 4px solid #3498db; }
+.house-sarue { border-left: 4px solid #2ecc71; }
+.house-onca { border-left: 4px solid #f39c12; }

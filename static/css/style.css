@@ -1,0 +1,143 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  background-color: #666666;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff; 
+}
+
+.login-container {
+  background-color: rgba(0, 0, 0, 0.5); 
+  padding: 40px 20px; 
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(17, 6, 124, 0.3);
+  max-width: 90%; 
+  width: 400px; 
+  backdrop-filter: blur(5px);
+}
+
+.login-container h1 {
+  text-align: center;
+  margin-bottom: 30px; 
+  color: white; 
+  font-size: 32px; 
+  font-weight: 700;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 10px; 
+  font-size: 16px; 
+  color: white; 
+}
+
+.input-box {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px; 
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 15px 20px; 
+  border: 2px solid #666666; 
+  border-radius: 20px;
+  font-size: 16px; 
+  outline: none;
+  transition: border-color 0.3s ease;
+  background-color: transparent; 
+  color: white; 
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: white; 
+}
+
+.input-box i {
+  position: absolute;
+  right: 20px;
+  top: 55%;
+  transform: translateY(-0%);
+  font-size: 20px;
+  color: white; 
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  user-select: none;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin-right: 10px; 
+  width: 20px; 
+  height: 20px;
+  cursor: pointer;
+}
+
+.checkbox-container label {
+  font-size: 16px; 
+  margin-bottom: 0; 
+  color: white; 
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  cursor: pointer;
+  padding: 15px 30px; 
+  font-size: 16px; 
+  border-radius: 20px;
+  border: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4); 
+}
+
+.btn-back {
+  background-color: white; 
+  color: rgb(0, 0, 0); 
+  box-shadow: 0 5px 15px rgb(2, 0, 102);
+  flex: 1;
+  margin-right: 10px;
+}
+
+.btn-back:hover {
+  background-color: transparent; 
+}
+
+.btn-login {
+  background-color: white; 
+  color: rgb(0, 0, 0);
+  box-shadow: 0 5px 15px rgb(2, 0, 102);
+  flex: 1;
+}
+
+.btn-login:hover {
+  background-color: transparent; 
+}
+
+.input-box i#togglePassword {
+  position: absolute;
+  right: 20px;
+  top: 55%;
+  transform: translateY(-0%);
+  font-size: 20px;
+  color: white;
+}
