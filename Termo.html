@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Jogo Termo</title>
+  <link rel="stylesheet" href="Termo.css">
+</head>
+<body>
+  <h1>Jogo Termo</h1>
+
+  <!-- Botão de menu -->
+  <button class="menu-btn" id="menuBtn">☰</button>
+
+  <!-- Menu lateral -->
+  <div class="menu-overlay" id="menuOverlay">
+    <div class="menu-box">
+      <h2>Menu</h2>
+
+      <div class="menu-section">
+        <h3>Selecione um dia</h3>
+        <div class="days" id="days"></div>
+      </div>
+
+      <button id="closeMenu">Fechar</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div>
+      <!-- Tabuleiro 6x5 -->
+      <div id="board" class="board" role="grid" aria-label="Tabuleiro do jogo">
+        <!-- 6 linhas x 5 colunas -->
+        <!-- linha 1 -->
+        <div class="tile" data-row="1" data-col="1"></div>
+        <div class="tile" data-row="1" data-col="2"></div>
+        <div class="tile" data-row="1" data-col="3"></div>
+        <div class="tile" data-row="1" data-col="4"></div>
+        <div class="tile" data-row="1" data-col="5"></div>
+        <!-- linha 2 -->
+        <div class="tile" data-row="2" data-col="1"></div>
+        <div class="tile" data-row="2" data-col="2"></div>
+        <div class="tile" data-row="2" data-col="3"></div>
+        <div class="tile" data-row="2" data-col="4"></div>
+        <div class="tile" data-row="2" data-col="5"></div>
+        <!-- linha 3 -->
+        <div class="tile" data-row="3" data-col="1"></div>
+        <div class="tile" data-row="3" data-col="2"></div>
+        <div class="tile" data-row="3" data-col="3"></div>
+        <div class="tile" data-row="3" data-col="4"></div>
+        <div class="tile" data-row="3" data-col="5"></div>
+        <!-- linha 4 -->
+        <div class="tile" data-row="4" data-col="1"></div>
+        <div class="tile" data-row="4" data-col="2"></div>
+        <div class="tile" data-row="4" data-col="3"></div>
+        <div class="tile" data-row="4" data-col="4"></div>
+        <div class="tile" data-row="4" data-col="5"></div>
+        <!-- linha 5 -->
+        <div class="tile" data-row="5" data-col="1"></div>
+        <div class="tile" data-row="5" data-col="2"></div>
+        <div class="tile" data-row="5" data-col="3"></div>
+        <div class="tile" data-row="5" data-col="4"></div>
+        <div class="tile" data-row="5" data-col="5"></div>
+        <!-- linha 6 -->
+        <div class="tile" data-row="6" data-col="1"></div>
+        <div class="tile" data-row="6" data-col="2"></div>
+        <div class="tile" data-row="6" data-col="3"></div>
+        <div class="tile" data-row="6" data-col="4"></div>
+        <div class="tile" data-row="6" data-col="5"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tutorial -->
+  <div class="tutorial-overlay" id="tutorial">
+    <div class="tutorial-box">
+      <h2>Como Jogar</h2>
+      <p>Descubra a palavra do dia.</p>
+
+      <div class="example">
+        <div class="tile correct">V</div>
+        <div class="tile present">I</div>
+        <div class="tile absent">D</div>
+      </div>
+
+      <p>
+        <b>Verde</b>: letra certa no lugar certo.<br>
+        <b>Amarelo</b>: letra certa, mas em outro lugar.<br>
+        <b>Cinza</b>: letra que não existe na palavra.
+      </p>
+
+      <button id="start-btn">Começar</button>
+    </div>
+  </div>
+
+  <script src="Termo.js"></script>
+</body>
+</html>
