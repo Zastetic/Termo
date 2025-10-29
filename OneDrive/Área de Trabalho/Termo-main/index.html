@@ -1,0 +1,349 @@
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Jogo Termo</title>
+  <style>
+    
+    h1{
+        text-align: center;
+        transform: translateY(100px);
+    }
+    :root{
+      --bg: #484862;
+      --board-bg: transparent;
+      --gap: 8px;
+      --cell-size: clamp(48px, 8vmin, 72px);
+      --border-color: #1f1f25;
+      --text-color: #ffffff;
+      --tile-radius: 6px;
+    }
+
+    
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--text-color);font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:24px}
+
+    /* Tabuleiro: 6 linhas x 5 colunas (como o term.ooo/wordle) */
+    .board{
+      display:grid;
+      grid-template-columns: repeat(5, var(--cell-size));
+      grid-auto-rows: var(--cell-size);
+      gap: var(--gap);
+      background:var(--board-bg);
+      padding: calc(var(--gap));
+      border-radius:12px;
+      -webkit-user-select:none;
+      user-select:none;
+    }
+
+    /* Cada célula (tile) */
+    .tile{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      font-size:calc(var(--cell-size) * 0.42);
+      line-height:1;
+      color:var(--text-color);
+      border-radius:var(--tile-radius);
+      border: 2px solid var(--border-color);
+      background: transparent;
+      text-transform:uppercase;
+      box-sizing:border-box;
+      
+    }
+
+    /* Estados*/
+    .tile.correct{ background:#538d4e; border-color:#538d4e; }
+    .tile.present{ background:#b59f3b; border-color:#b59f3b; }
+    .tile.absent{ background:#3a3a3c; border-color:#3a3a3c; }
+
+    /* efeito quando a letra aparece */
+    .tile.pop{ transform: scale(1.06); }
+
+  /* ===== Botão de Menu ===== */
+.menu-btn {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: #3a3a3c;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: 0.2s ease;
+}
+.menu-btn:hover {
+  background: #538d4e;
+}
+
+/* ===== Overlay do Menu ===== */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  animation: 0.3s ease;
+}
+
+.menu-box {
+  background: #1a1a1b;
+  color: #fff;
+  padding: 24px 32px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.menu-box h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.menu-section h3 {
+  font-size: 16px;
+  color: #d4d4d4;
+  margin-bottom: 8px;
+}
+
+/* ===== Botões de Dias ===== */
+.days {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+  gap: 6px;
+  max-width: 300px;
+  margin: 0 auto 20px;
+}
+
+.days button {
+  background: #3a3a3c;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer; 
+  transition: 0.2s ease;
+}
+
+.days button:hover {
+  background: #538d4e;
+}
+
+/* ===== Botão Fechar ===== */
+#closeMenu {
+  background: #538d4e;
+  border: none;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition:  0.2s ease;
+}
+
+#closeMenu:hover {
+  background: #6aa861;
+}
+
+
+    /* Tutorial */
+.tutorial-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.tutorial-box {
+  background: #1a1a1b;
+  color: #fff;
+  padding: 24px 32px;
+  border-radius: 12px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  animation: 0.4s ease;
+}
+
+.tutorial-box h2 {
+  margin-top: 0;
+}
+
+.tutorial-box p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #d4d4d4;
+}
+
+.tutorial-box .example {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 10px 0;
+}
+
+.example .tile {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+}
+
+.tutorial-box button {
+  margin-top: 12px;
+  padding: 10px 18px;
+  background: #538d4e;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition:  0.2s ease;
+}
+
+.tutorial-box button:hover {
+  background: #6aa861;
+}
+
+    @media (max-width:420px){
+      :root{ --gap:6px }
+    }
+
+
+  
+  </style>
+</head>
+<body>
+    <h1>Jogo Termo</h1>
+    <!-- Botão de menu -->
+<button class="menu-btn" id="menuBtn">☰</button>
+
+<!-- Menu lateral -->
+<div class="menu-overlay" id="menuOverlay">
+  <div class="menu-box">
+    <h2>Menu</h2>
+
+    <div class="menu-section">
+      <h3>Selecione um dia</h3>
+      <div class="days" id="days"></div>
+    </div>
+
+    <button id="closeMenu">Fechar</button>
+  </div>
+</div>
+
+  <div class="wrap">
+    <div>
+      <!-- Tabuleiro 6x5: apenas estrutura (sem lógica). Cada tile tem data-row e data-col -->
+      <div class="board" role="grid" aria-label="Tabuleiro do jogo">
+        <!-- 6 linhas x 5 colunas = 30 tiles -->
+        <!-- linha 1 -->
+        <div class="tile" data-row="1" data-col="1" aria-hidden="true"></div>
+        <div class="tile" data-row="1" data-col="2"></div>
+        <div class="tile" data-row="1" data-col="3"></div>
+        <div class="tile" data-row="1" data-col="4"></div>
+        <div class="tile" data-row="1" data-col="5"></div>
+        <!-- linha 2 -->
+        <div class="tile" data-row="2" data-col="1"></div>
+        <div class="tile" data-row="2" data-col="2"></div>
+        <div class="tile" data-row="2" data-col="3"></div>
+        <div class="tile" data-row="2" data-col="4"></div>
+        <div class="tile" data-row="2" data-col="5"></div>
+        <!-- linha 3 -->
+        <div class="tile" data-row="3" data-col="1"></div>
+        <div class="tile" data-row="3" data-col="2"></div>
+        <div class="tile" data-row="3" data-col="3"></div>
+        <div class="tile" data-row="3" data-col="4"></div>
+        <div class="tile" data-row="3" data-col="5"></div>
+        <!-- linha 4 -->
+        <div class="tile" data-row="4" data-col="1"></div>
+        <div class="tile" data-row="4" data-col="2"></div>
+        <div class="tile" data-row="4" data-col="3"></div>
+        <div class="tile" data-row="4" data-col="4"></div>
+        <div class="tile" data-row="4" data-col="5"></div>
+        <!-- linha 5 -->
+        <div class="tile" data-row="5" data-col="1"></div>
+        <div class="tile" data-row="5" data-col="2"></div>
+        <div class="tile" data-row="5" data-col="3"></div>
+        <div class="tile" data-row="5" data-col="4"></div>
+        <div class="tile" data-row="5" data-col="5"></div>
+        <!-- linha 6 -->
+        <div class="tile" data-row="6" data-col="1"></div>
+        <div class="tile" data-row="6" data-col="2"></div>
+        <div class="tile" data-row="6" data-col="3"></div>
+        <div class="tile" data-row="6" data-col="4"></div>
+        <div class="tile" data-row="6" data-col="5"></div>
+      </div>     
+  </div>
+
+  <!-- Tutorial -->
+<div class="tutorial-overlay" id="tutorial">
+  <div class="tutorial-box">
+    <h2>Como Jogar</h2>
+    <p>Descubra a palavra do dia.</p>
+
+    <div class="example">
+      <div class="tile correct">V</div>
+      <div class="tile present">I</div>
+      <div class="tile absent">D</div>
+    </div>
+
+    <p>
+      <b>Verde</b>: letra certa no lugar certo.<br>
+      <b>Amarelo</b>: letra certa, mas em outro lugar.<br>
+      <b>Cinza</b>: letra que não existe na palavra.
+    </p>
+
+    <button id="start-btn">Começar</button>
+  </div>
+</div>
+<script>
+    // Tutorial
+const tutorial = document.getElementById('tutorial');
+const startBtn = document.getElementById('start-btn');
+
+startBtn.addEventListener('click', () => {
+  tutorial.style.display = 'none';
+  document.getElementById('board').classList.add('active');
+});
+// ====== MENU ======
+const menuBtn = document.getElementById('menuBtn');
+const menuOverlay = document.getElementById('menuOverlay');
+const closeMenu = document.getElementById('closeMenu');
+const daysContainer = document.getElementById('days');
+
+// Abrir e fechar menu
+menuBtn.addEventListener('click', () => {
+  menuOverlay.style.display = 'flex';
+});
+
+closeMenu.addEventListener('click', () => {
+  menuOverlay.style.display = 'none';
+});
+
+// Gerar botões de dias
+for (let i = 0; i <= 30; i++) {
+  const btn = document.createElement('button');
+  btn.textContent = i;
+  btn.addEventListener('click', () => {
+  });
+  daysContainer.appendChild(btn);
+}
+
+</script>
+</body>
+</html>
