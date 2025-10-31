@@ -1,5 +1,4 @@
 // ===== Tutorial =====
-// Proteções: verifica se os elementos existem antes de usar
 const tutorial = document.getElementById('tutorial');
 const startBtn = document.getElementById('start-btn');
 
@@ -8,7 +7,6 @@ if (startBtn && tutorial) {
     tutorial.style.display = 'none';
     const board = document.getElementById('board');
     if (board) board.classList.add('active');
-    // quando o jogador clicar em começar, permitimos jogar somente se a palavra já estiver carregada
     if (!palavraDoDia) {
       alert('Aguarde: carregando a palavra do dia. Tente novamente em alguns segundos.');
     } else {
@@ -41,7 +39,6 @@ if (daysContainer) {
     btn.textContent = i;
     btn.addEventListener('click', () => {
       console.log(`Dia ${i} selecionado`);
-      // aqui você pode trocar palavraDoDia caso queira
     });
     daysContainer.appendChild(btn);
   }
@@ -55,38 +52,27 @@ const totalLinhas = 6;
 const totalColunas = 5;
 let linhaAtual = 1;
 let colunaAtual = 1;
-
-// Se true, o jogo aceita entrada do teclado.
-// Será true somente depois que a palavra for carregada e o jogador apertar "Começar".
 let jogoAtivo = false;
 let tabuleiro = Array.from({ length: totalLinhas }, () => Array(totalColunas).fill(""));
 
 async function escolherPalavraDoDia() {
   try {
-    for (let tentativa = 0; tentativa < 12; tentativa++) {
+    for (let tentativa = 0; tentativa < 150; tentativa++) {
       const resposta = await fetch("https://api.dicionario-aberto.net/random");
       if (!resposta.ok) continue;
       const dados = await resposta.json();
-      // dependendo da resposta, pode ser objeto com .word
       const palavra = (dados && dados.word ? dados.word : "").toString().toUpperCase();
-
-      // aceita somente 5 letras sem acento/hífen (mantemos A-Z e Ç)
       if (/^[A-ZÇ]{5}$/.test(palavra)) {
         palavraDoDia = palavra;
         console.log("Palavra do dia carregada:", palavraDoDia);
-        // se o jogador já clicou em Começar, ativamos o jogo
         if (tutorial && tutorial.style.display === 'none') jogoAtivo = true;
         return;
       }
     }
 
-let temp = ["Igual", "Hotel", "Gosma", "Fisga", "Êxito", "Dessa", "trono", "Bicho", "ganso","nariz"];
+let temp = ["IGUAL", "HOTEL", "GOSMA", "FISGA", "DESSA", "tRONO", "BICHO", "GANSO","NARIZ"];
 let indiceAleatorio = Math.floor(Math.random() * temp.length);
-
-// Pegar o item aleatório
 let palavraAL = temp[indiceAleatorio];
-
-    // fallback caso não encontre palavra apropriada
     palavraDoDia = palavraAL;
     console.warn("Não foi possível gerar palavra válida. Usando fallback:", palavraDoDia);
     if (tutorial && tutorial.style.display === 'none') jogoAtivo = true;
@@ -96,8 +82,6 @@ let palavraAL = temp[indiceAleatorio];
     if (tutorial && tutorial.style.display === 'none') jogoAtivo = true;
   }
 }
-
-// chama no carregamento da página
 escolherPalavraDoDia();
 
 // ===== Verificar palavra válida via API =====
@@ -116,8 +100,7 @@ async function verificarPalavraValida(palavra) {
 // ===== Captura do teclado (só se jogoAtivo for true) =====
 document.addEventListener("keydown", (evento) => {
   if (!jogoAtivo) {
-    // opcional: informar que o jogo não iniciou
-    // console.log("Jogo não iniciado ou palavra ainda está carregando.");
+    console.log("Jogo não iniciado ou palavra ainda está carregando.");
     return;
   }
 
@@ -130,7 +113,6 @@ document.addEventListener("keydown", (evento) => {
 
 // ===== Inserir letra =====
 function inserirLetra(letra) {
-  // segurança: verifica se a célula existe
   if (colunaAtual > totalColunas) return;
   const celula = document.querySelector(`[data-row="${linhaAtual}"][data-col="${colunaAtual}"]`);
   if (!celula) {
@@ -168,12 +150,10 @@ async function confirmarLinha() {
     return;
   }
 
-  // Monta a palavra a partir da matriz
   const tentativa = tabuleiro[linhaAtual - 1].join("").toUpperCase();
   console.log(`Tentativa ${linhaAtual}: ${tentativa}`);
   console.log("Estado do tabuleiro:", tabuleiro);
 
-  // Verifica se a palavra existe
   const valida = await verificarPalavraValida(tentativa);
   if (!valida) {
     alert(" Essa palavra não existe em português");
@@ -192,14 +172,12 @@ async function confirmarLinha() {
     else celula.classList.add("absent");
   }
 
-  // Verifica vitória
   if (palavraDoDia && tentativa === palavraDoDia) {
     setTimeout(() => alert(`Parabéns: ${palavraDoDia}`), 200);
-    jogoAtivo = false; // bloqueia mais entradas
+    jogoAtivo = false;
     return;
   }
 
-  // Avançar linha ou terminar jogo
   if (linhaAtual < totalLinhas) {
     linhaAtual++;
     colunaAtual = 1;
